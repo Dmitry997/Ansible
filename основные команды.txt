@@ -1,0 +1,9 @@
+ansible-playbook --syntax-check example.yaml
+
+
+ansible all –i inventory --list-hosts   - запустит обращение к файлу инвентори
+
+
+ansible –-version shows which configuration file is used
+
+
