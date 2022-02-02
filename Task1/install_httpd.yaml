@@ -16,10 +16,18 @@
         name: firewalld
         state: started
         enabled: yes
-    - name: open port 80
+ #   - name: open port 80udp
+ #     firewalld:
+ #       zone: public
+ #       port: 80/udp
+ #       permanent: true
+ #       state: enabled
+ #     notify:
+ #       - restart_firewalld
+    - name: open port 80tcp
       firewalld:
         zone: public
-        port: 80/udp
+        service: http
         permanent: true
         state: enabled
       notify:
