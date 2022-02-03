@@ -1,0 +1,30 @@
+---
+- name: configure and delete web server
+  hosts: nodes
+  tasks:
+    - name: delete httpd
+      yum: 
+        name: httpd
+        state: absent
+    - name: check run firewalld
+      service: 
+        name: firewalld
+        state: started
+        enabled: yes
+    - name: close port 80tcp
+      firewalld:
+        zone: public
+        service: http
+        permanent: yes
+        state: disabled
+      notify:
+        - restart_firewalld
+    - name: Delete file
+      file:
+        state: absent    
+        path: "/var/www/html/index.html"
+  handlers:
+    - name: restart_firewalld
+      service:
+        name: firewalld
+        state: restarted

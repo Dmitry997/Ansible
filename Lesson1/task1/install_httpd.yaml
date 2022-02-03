@@ -1,6 +1,6 @@
 ---
 - name: set up web server
-  hosts: all
+  hosts: nodes
   tasks:
     - name: install httpd
       yum: 
@@ -16,14 +16,6 @@
         name: firewalld
         state: started
         enabled: yes
- #   - name: open port 80udp
- #     firewalld:
- #       zone: public
- #       port: 80/udp
- #       permanent: true
- #       state: enabled
- #     notify:
- #       - restart_firewalld
     - name: open port 80tcp
       firewalld:
         zone: public
@@ -40,5 +32,5 @@
   handlers:
     - name: restart_firewalld
       service:
-        name: httpd
+        name: firewalld
         state: restarted
