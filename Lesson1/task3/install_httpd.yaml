@@ -1,0 +1,36 @@
+---
+- name: set up web server
+  hosts: nodes
+  tasks:
+    - name: install httpd
+      yum: 
+        name: httpd
+        state: latest
+    - name: check run httpd
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+    - name: check run firewalld
+      service: 
+        name: firewalld
+        state: started
+        enabled: yes
+    - name: open port 80tcp
+      firewalld:
+        zone: public
+        service: http
+        permanent: true
+        state: enabled
+      notify:
+        - restart_firewalld
+    - name: Creating a file with content
+      copy:
+        dest: "/var/www/html/index.html"
+        content: |
+          Welcome to my web server
+  handlers:
+    - name: restart_firewalld
+      service:
+        name: firewalld
+        state: restarted
