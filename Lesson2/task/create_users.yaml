@@ -10,7 +10,7 @@
         comment: "{{ item.comment }}"
         password: "{{ item.pass | password_hash('sha512') }}"
         state: present
-        update_password: on_create
+        update_password: on_create        
       with_items:
           - { name: "alice", comment: "alice@example.com", pass: "{{ alicepass }}" }
           - { name: "bob", comment: "bob@example.com", pass: "{{ alicepass }}" }
