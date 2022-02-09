@@ -13,5 +13,5 @@
         update_password: on_create        
       with_items:
           - { name: "alice", comment: "alice@example.com", pass: "{{ alicepass }}" }
-          - { name: "bob", comment: "bob@example.com", pass: "{{ alicepass }}" }
-          - { name: "carol", comment: "carol@example.com", pass: "{{ alicepass }}" }
+          - { name: "bob", comment: "bob@example.com", pass: "{{ bobpass }}" }
+          - { name: "carol", comment: "carol@example.com", pass: "{{ carolpass }}" }
