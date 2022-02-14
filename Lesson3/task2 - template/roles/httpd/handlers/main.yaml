@@ -1,7 +1,0 @@
----
-# handlers for httpd
-
-    - name: restart_firewalld
-      service:
-        name: firewalld
-        state: restarted

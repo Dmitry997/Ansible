@@ -14,3 +14,6 @@ echo "ansible ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/ansible
 
 
 ssh-copy-id node1.example.com && ssh-copy-id node2.example.com
+
+
+chmod -R 777 /var/ftp/pub/upload

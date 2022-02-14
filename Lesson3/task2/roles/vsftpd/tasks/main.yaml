@@ -1,0 +1,68 @@
+---
+# tasks for vsftpd
+
+    - name: install vsftpd
+      yum: 
+        name: vsftpd
+        state: latest
+    - name: check run vsftpd
+      service:
+        name: vsftpd
+        state: started
+        enabled: yes
+    - name: Created conf file for vsftpd
+      copy:
+        src: ./roles/vsftpd/templates/vsftpd.conf
+        dest: /etc/vsftpd/vsftpd.conf
+        mode: 0755
+        group: root
+        owner: root 
+      notify:
+        - restart_vsftpd  
+    - name: created directory for upload
+      file: 
+        path: /var/ftp/pub/upload
+        state: directory
+        mode: 0777
+        group: root
+        owner: root
+        setype: public_content_rw_t
+#    - name: Disable SELinux  
+#      selinux: 
+#        state: disabled
+#      notify:
+#        - restart_server
+    - name: install SELinux libraries
+      yum: 
+        name: "{{ item }}"
+        state: present
+      loop:
+        - python3-libselinux
+        - python3-libsemanage
+        - python3-policycoreutils
+    - name: Conf SELinux  
+      seboolean:
+        name: ftpd_anon_write      
+        state: true
+    - name: check run firewalld
+      service: 
+        name: firewalld
+        state: started
+        enabled: yes
+    - name: open port for FTP
+      firewalld:
+        zone: public
+        service: ftp
+        permanent: true
+        state: enabled
+      notify:
+        - restart_firewalld
+      
+    - name: Created files with content for tests
+      copy:
+        dest: "{{ item }}"
+        content: |
+          FTP test
+      loop:
+        - "/var/ftp/pub/test.txt"
+        - "/var/ftp/pub/upload/text2.txt"

@@ -1,0 +1,6 @@
+---
+- name: installing and conf FTP server
+  hosts: nodes
+
+  roles:
+    - role: vsftpd

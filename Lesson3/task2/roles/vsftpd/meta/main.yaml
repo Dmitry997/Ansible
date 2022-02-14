@@ -1,6 +1,6 @@
 galaxy_info:
   author: dmitrii
-  description: this role can be used for httpd configuration
+  description: this role can be used for FTP configuration
   company: your company (optional)
 
   # If the issue tracker for your role is not on github, uncomment the

@@ -1,0 +1,7 @@
+https://howto.lintel.in/enable-disable-selinux-centos/
+
+sestatus
+
+getenforce - статус защиты
+По умолчанию enabled и enforced (Enforcing)
+

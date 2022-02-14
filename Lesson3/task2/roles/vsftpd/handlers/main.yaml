@@ -1,0 +1,16 @@
+---
+# handlers for httpd
+
+    - name: restart_firewalld
+      service:
+        name: firewalld
+        state: restarted
+    - name: restart_server
+      command: /sbin/shutdown -r
+      async: 0
+      poll: 0
+      ignore_errors: true
+    - name: restart_vsftpd
+      service:  
+        name: vsftpd
+        state: restarted

@@ -1,7 +1,0 @@
----
-- name: installing and conf web server
-  hosts: nodes
-
-  roles:
-    - role: httpd
-      system_manager: dmitrii@example.com
