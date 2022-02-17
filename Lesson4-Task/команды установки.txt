@@ -1,0 +1,38 @@
+Версия 17. по уроку
+
+sudo yum install -y epel-release
+sudo yum install -y ansible bash-completion git device-mapper-persistent-data lvm2 python3 yum-utils make nodejs
+выключаю SELinux
+
+Установка докера:
+yum config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
+yum install docker-ce docker-ce-cli containerd.io
+
+docker --version
+ systemctl enable docker
+systemctl status docker
+
+pip3 install docker-compose
+решаю проблему с билдом и запуском:
+sudo su
+sudo curl -L https://github.com/docker/compose/releases/download/1.21.0/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
+sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+
+проверяем: docker-compose --version
+
+добавляю ансибл в группу докера
+sudo usermod -aG docker ansible
+sudo negrp docker
+systemctl start docker
+
+
+Установка AWX
+17.1.0:  https://github.com/ansible/awx/blob/17.0.1/INSTALL.md
+git clone -b 17.1.0 https://github.com/ansible/awx.git
+
+Вношу пароль в 
+awx/inventory
+
+запускаю установку через плейбук
+ansible-playbook -i inventory install.yml

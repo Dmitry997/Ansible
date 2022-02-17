@@ -1,4 +1,7 @@
 https://howto.lintel.in/enable-disable-selinux-centos/
+Open the file  /etc/selinux/config  and change the option SELINUX to disabled
+
+
 
 sestatus
 
